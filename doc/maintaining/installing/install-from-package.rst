@@ -5,8 +5,8 @@ Installing CKAN from package
 ============================
 
 This section describes how to install CKAN from package. This is the quickest
-and easiest way to install CKAN, but it requires **Ubuntu 16.04 64-bit** or **Ubuntu 14.04 64-bit**. If
-you're not using Ubuntu 16.04 64-bit or Ubuntu 14.04 64-bit, or if you're installing CKAN for
+and easiest way to install CKAN, but it requires **Ubuntu 16.04 64-bit**. If
+you're not using Ubuntu 16.04 64-bit, or if you're installing CKAN for
 development, you should follow :doc:`install-from-source` instead.
 
 At the end of the installation process you will end up with two running web
@@ -63,12 +63,6 @@ CKAN:
 
            wget \http://packaging.ckan.org/|latest_package_name_xenial|
 
-   - On Ubuntu 14.04:
-
-       .. parsed-literal::
-
-           wget \http://packaging.ckan.org/|latest_package_name_trusty|
-
 
 #. Install the CKAN package:
 
@@ -78,11 +72,6 @@ CKAN:
 
            sudo dpkg -i |latest_package_name_xenial|
 
-   - On Ubuntu 14.04:
-
-       .. parsed-literal::
-
-           sudo dpkg -i |latest_package_name_trusty|
 
     .. note:: If you get the following error it means that for some reason the
      Apache WSGI module was not enabled::
@@ -133,9 +122,6 @@ Install |solr|, running this command in a terminal::
 
     sudo apt-get install -y solr-jetty
 
-The install will whirr away, then towards the end you'll see this::
-
-     * Not starting jetty - edit /etc/default/jetty (or /etc/default/jetty8) and change NO_START to be 0 (or comment it out).
 
 .. include:: solr.rst
 
