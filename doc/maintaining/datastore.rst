@@ -170,24 +170,24 @@ This should return a JSON page without errors.
 
 To test the whether the set-up allows writing, you can create a new DataStore resource.
 
-First, access the virtual enviornment:
+First, access the virtual enviornment::
 
   . /usr/lib/ckan/default/bin/activate
   cd /usr/lib/ckan/default/src/ckan
 
-Run the following command to view the API key: 
+Run the following command to view the API key::
 
   paster user **your-user-name** apikey -c /etc/ckan/default/production.ini
 
-Note: if you do not have dataset yet, you can run the following command for test data: 
+Note: if you do not have dataset yet, you can run the following command for test data::
 
   paster create-test-data -c /etc/ckan/default/production.ini
 
-Then access the package id with the following command: 
+Then access the package id with the following command::
 
   paster dataset **your-dataset-name** -c /etc/ckan/default/production.ini
 
-Next, exit the virtual enviornment: 
+Next, exit the virtual enviornment::
 
   deactivate
 
