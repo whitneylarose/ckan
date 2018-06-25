@@ -169,20 +169,41 @@ following command to list all DataStore resources::
 This should return a JSON page without errors.
 
 To test the whether the set-up allows writing, you can create a new DataStore resource.
-To do so, run the following command::
 
- curl -X POST http://127.0.0.1:5000/api/3/action/datastore_create -H "Authorization: {YOUR-API-KEY}" -d '{"resource": {"package_id": "{PACKAGE-ID}"}, "fields": [ {"id": "a"}, {"id": "b"} ], "records": [ { "a": 1, "b": "xyz"}, {"a": 2, "b": "zzz"} ]}'
+First, access the virtual enviornment:
 
-Replace ``{YOUR-API-KEY}`` with a valid API key and ``{PACKAGE-ID}`` with the
-id of an existing CKAN dataset.
+  . /usr/lib/ckan/default/bin/activate
+  cd /usr/lib/ckan/default/src/ckan
+
+Run the following command to view the API key: 
+
+  paster user **your-user-name** apikey -c /etc/ckan/default/production.ini
+
+Note: if you do not have dataset yet, you can run the following command for test data: 
+
+  paster create-test-data -c /etc/ckan/default/production.ini
+
+Then access the package id with the following command: 
+
+  paster dataset **your-dataset-name** -c /etc/ckan/default/production.ini
+
+Next, exit the virtual enviornment: 
+
+  deactivate
+
+Replace ``**YOUR-API-KEY**`` with a valid API key and ``**PACKAGE-ID**`` with the
+id of an existing CKAN dataset and run the following command::
+
+ curl -X POST http://127.0.0.1:5000/api/3/action/datastore_create -H "Authorization: **YOUR-API-KEY**" -d '{"resource": {"package_id": "**PACKAGE-ID**"}, "fields": [ {"id": "a"}, {"id": "b"} ], "records": [ { "a": 1, "b": "xyz"}, {"a": 2, "b": "zzz"} ]}'
+
 
 A table named after the resource id should have been created on your DataStore
 database. Visiting this URL should return a response from the DataStore with
 the records inserted above::
 
- http://127.0.0.1:5000/api/3/action/datastore_search?resource_id={RESOURCE_ID}
+ http://127.0.0.1:5000/api/3/action/datastore_search?resource_id=**RESOURCE_ID**
 
-Replace ``{RESOURCE-ID}`` with the resource id that was returned as part of the
+Replace ``**RESOURCE-ID**`` with the resource id that was returned as part of the
 response of the previous API call.
 
 You can now delete the DataStore table with::
