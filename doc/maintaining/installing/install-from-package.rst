@@ -140,6 +140,11 @@ Install |solr|, running this command in a terminal::
       Provide the site's URL. For example::
 
         ckan.site_url = http://demo.ckan.org
+        
+    display_timezone
+      Enter a time zone. For example::
+      
+        ckan.display_timezone = US/Eastern
 
 #. Initialize your CKAN database by running this command in a terminal::
 
