@@ -157,15 +157,15 @@ Restart Apache and Nginx by running this command in a terminal::
 6. You're done!
 ---------------
 
-Open http://you-host-address in your web browser. You should see the CKAN front
+Open http://your-host-address in your web browser. You should see the CKAN front
 page:
 
 
-You can now move on to :doc:`/maintaining/getting-started` to begin using and customizing
+You can now move on to Getting Started to begin using and customizing
 your CKAN site.
 
 .. note:: The default authorization settings on a new install are deliberately
     restrictive. Regular users won't be able to create datasets or organizations.
-    You should check the :doc:`/maintaining/authorization` documentation, configure CKAN accordingly
-    and grant other users the relevant permissions using the :ref:`sysadmin account <create-admin-user>`.
+    You should check the Authorization documentation, configure CKAN accordingly
+    and grant other users the relevant permissions using the create-admin-user.
 
