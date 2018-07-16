@@ -5,13 +5,7 @@ Installing CKAN from package
 ============================
 
 This section describes how to install CKAN from package. This is the quickest
-and easiest way to install CKAN, but it requires **Ubuntu 16.04 64-bit**. If
-you're not using Ubuntu 16.04 64-bit, or if you're installing CKAN for
-development, you should follow :doc:`install-from-source` instead.
-
-At the end of the installation process you will end up with two running web
-applications, CKAN itself and the DataPusher, a separate service for automatically
-importing data to CKAN's :doc:`/maintaining/datastore`.
+and easiest way to install CKAN, but it requires **Ubuntu 16.04 64-bit**. 
 
 
 Host ports requirements:
@@ -92,19 +86,13 @@ CKAN:
 2. Install and configure PostgreSQL
 -----------------------------------
 
-.. tip::
-
-   You can install |postgres| and CKAN on different servers. Just
-   change the :ref:`sqlalchemy.url` setting in your
-   |production.ini| file to reference your |postgres| server.
-
-Install |postgres|, running this command in a terminal::
+Install postgres, running this command in a terminal::
 
     sudo apt-get install -y postgresql
 
 .. include:: postgres.rst
 
-Edit the :ref:`sqlalchemy.url` option in your :ref:`config_file` (|production.ini|) file and
+Edit the sqlalchemy.url option in your config file (/etc/ckan/default/production.ini) file and
 set the correct password, database and database user.
 
 
@@ -114,11 +102,11 @@ set the correct password, database and database user.
 
 .. tip::
 
-   You can install |solr| and CKAN on different servers. Just
-   change the :ref:`solr_url` setting in your
+   You can install solr and CKAN on different servers. Just
+   change the :solr setting in your
    |production.ini| file to reference your |solr| server.
 
-Install |solr|, running this command in a terminal::
+Install solr, running this command in a terminal::
 
     sudo apt-get install -y solr-jetty
 
@@ -129,7 +117,7 @@ Install |solr|, running this command in a terminal::
 4. Update the configuration and initialize the database
 -------------------------------------------------------
 
-#. Edit the :ref:`config_file` (|production.ini|) to set up the following options:
+#. Edit the config file (/ect/ckan/default/production.ini) to set up the following options:
 
     site_id
       Each CKAN site should have a unique ``site_id``, for example::
@@ -169,13 +157,9 @@ Restart Apache and Nginx by running this command in a terminal::
 6. You're done!
 ---------------
 
-Open http://localhost in your web browser. You should see the CKAN front
-page, which will look something like this:
+Open http://you-host-address in your web browser. You should see the CKAN front
+page:
 
-.. image :: /images/9.png
-   :width: 807px
-
-|
 
 You can now move on to :doc:`/maintaining/getting-started` to begin using and customizing
 your CKAN site.
