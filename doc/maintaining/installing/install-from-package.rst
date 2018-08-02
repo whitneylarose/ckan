@@ -55,7 +55,7 @@ CKAN:
 
        .. parsed-literal::
 
-           wget \http://packaging.ckan.org/|latest_package_name_xenial|
+           wget \http://packaging.ckan.org/python-ckan_2.8-xenial_amd64.deb
 
 
 #. Install the CKAN package:
@@ -64,7 +64,7 @@ CKAN:
 
        .. parsed-literal::
 
-           sudo dpkg -i |latest_package_name_xenial|
+           sudo dpkg -i python-ckan_2.8-xenial_amd64.deb
 
 
     .. note:: If you get the following error it means that for some reason the
@@ -90,28 +90,49 @@ Install postgres, running this command in a terminal::
 
     sudo apt-get install -y postgresql
 
-.. include:: postgres.rst
+
+Next you’ll need to create a database user if one doesn’t already exist. Create a new PostgreSQL database user called ckan_default, and enter a password for the user when prompted. You’ll need this password later::
+
+  sudo -u postgres createuser -S -D -R -P ckan_default
+
+
+Create a new PostgreSQL database, called ckan_default, owned by the database user you just created::
+
+  sudo -u postgres createdb -O ckan_default ckan_default -E utf-8
+
 
 Edit the sqlalchemy.url option in your config file (/etc/ckan/default/production.ini) file and
 set the correct password, database and database user.
 
 
 -----------------------------
-3. Install and configure Solr
+3. Install and configure Solr and Jetty
 -----------------------------
-
-.. tip::
-
-   You can install solr and CKAN on different servers. Just
-   change the :solr setting in your
-   |production.ini| file to reference your |solr| server.
 
 Install solr, running this command in a terminal::
 
     sudo apt-get install -y solr-jetty
 
 
-.. include:: solr.rst
+Edit the Jetty configuration file (/etc/default/jetty8 or /etc/default/jetty) and change the following variables::
+
+  NO_START=0            # (line 4)
+  JETTY_HOST=127.0.0.1  # (line 16)
+  JETTY_PORT=8983       # (line 19)
+
+
+Start or restart the Jetty server.
+
+For Ubuntu 16.04::
+
+  sudo service jetty8 restart
+
+
+Finally, change the solr_url setting in your CKAN configuration file (/etc/ckan/default/production.ini) to point to your Solr server, for example::
+
+  solr_url=http://127.0.0.1:8983/solr
+
+
 
 -------------------------------------------------------
 4. Update the configuration and initialize the database
@@ -138,12 +159,6 @@ Install solr, running this command in a terminal::
 
     sudo ckan db init
 
-#. Optionally, setup the DataStore and DataPusher by following the
-   instructions in :doc:`/maintaining/datastore`.
-
-#. Also optionally, you can enable file uploads by following the
-   instructions in :doc:`/maintaining/filestore`.
-
 ---------------------------
 5. Restart Apache and Nginx
 ---------------------------
@@ -163,9 +178,4 @@ page:
 
 You can now move on to Getting Started to begin using and customizing
 your CKAN site.
-
-.. note:: The default authorization settings on a new install are deliberately
-    restrictive. Regular users won't be able to create datasets or organizations.
-    You should check the Authorization documentation, configure CKAN accordingly
-    and grant other users the relevant permissions using the create-admin-user.
 
